@@ -7,8 +7,9 @@ public class ThreeOrMore : Game
         Name = "Three Or More";
     }
     
-    public override void PlayGame()
+    public override int PlayGame()
     {
         Console.WriteLine("Playing Three Or More!");
+        return 0;
     }
 }
