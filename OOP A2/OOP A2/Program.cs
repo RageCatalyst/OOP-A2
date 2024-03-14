@@ -4,11 +4,19 @@ class Program
 {
     static void Main(string[] args)
     {
-        for(int i = 0; i < 1000; i++)
+        Game[] games =
+        [
+            new SevensOut(),
+            new ThreeOrMore()
+        ];
+
+        
+        Console.WriteLine("\n################\n");
+        for(int i = 0; i < games.Length; i++)
         {
-            Die die = new Die();
-            die.Roll();
-            Console.WriteLine(die.Value);
+            // Displays each game's name
+            Console.WriteLine($"[{i+1}] - {games[i].Name}");
+
         }
     }
 }
