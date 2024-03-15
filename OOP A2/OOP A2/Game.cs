@@ -4,5 +4,5 @@ public abstract class Game
 {
     public string Name { get; protected set; } = "";
     
-    public abstract int PlayGame();
+    public abstract void PlayGame();
 }

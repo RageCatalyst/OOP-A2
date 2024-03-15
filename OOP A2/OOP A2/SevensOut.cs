@@ -7,7 +7,7 @@ public class SevensOut : Game
         Name = "Sevens Out";
     }
     
-    public override int PlayGame()
+    public override void PlayGame()
     {
         Console.WriteLine("Playing Sevens Out!\n \n");
         Die[] dice = new Die[2];
@@ -22,6 +22,10 @@ public class SevensOut : Game
         
         while(!gameOver)
         {
+            
+            Console.WriteLine($"Total = {total} \nPress Enter to roll again!");
+            Console.ReadLine();
+            
             j++;
             // roll both die
             foreach (var t in dice)
@@ -35,12 +39,13 @@ public class SevensOut : Game
             // check if either roll is 7
             gameOver = (dice[0].Value + dice[1].Value == 7);
             
-            total += dice[0] == dice[1] ? (dice[0].Value + dice[1].Value) * 2 : dice[0].Value + dice[1].Value;
+            if(dice[0].Value == dice[1].Value)
+            {
+                total += (dice[0].Value + dice[1].Value) * 2;
+            } else total += dice[0].Value + dice[1].Value;
+            
+            
         }
         Console.WriteLine($"Game Over! You rolled a total of 7! \nEnd Total: {total}\n \n");
-        
-        return total;
-
-        
     }
 }

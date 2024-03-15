@@ -18,7 +18,7 @@ class Program
             Console.WriteLine($"[{i+1}] - {games[i].Name}");
         }
         // Asks the user to select a game
-        Console.WriteLine("\n Select a game:");
+        Console.WriteLine("\nSelect a game:");
         int choice = Convert.ToInt32(Console.ReadLine());
         // Plays the selected game
         games[choice-1].PlayGame();
