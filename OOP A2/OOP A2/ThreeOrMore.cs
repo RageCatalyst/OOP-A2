@@ -28,12 +28,9 @@ public class ThreeOrMore : Game
 
             var dieValues = CountDie(dice);
 
-            foreach (var pair in dieValues)
+            foreach (var pair in dieValues.Where(pair => pair.Value >= 2))
             {
-                if (pair.Value >= 2)
-                {
-                    Console.WriteLine($"You rolled a {pair.Key} {pair.Value} times!");
-                }
+                Console.WriteLine($"You rolled a {pair.Key} {pair.Value} times!");
             }
             
             // if play chooses, re-roll all die
@@ -66,9 +63,29 @@ public class ThreeOrMore : Game
                 
                 // display highest frequency die value
                 var max = dieValues.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
-                Console.WriteLine($"The highest frequency die value is {max} with {dieValues[max]}!");
+                Console.WriteLine($"The highest frequency die value is {max} with {dieValues[max]} occurrences!");
+                int score = 0;
+                switch (dieValues[max])
+                {
+                    case 3:
+                        Console.WriteLine("\nYou got a 3-of-a-kind! +3\n");
+                        score += 3;
+                        break;
+                    case 4:
+                        Console.WriteLine("\nYou got a 4-of-a-kind! +6\n");
+                        score += 6;
+                        break;
+                    case 5:
+                        Console.WriteLine("\nYou got a 5-of-a-kind! +12\n");
+                        score += 12;
+                        break;
+                    default:
+                        Console.WriteLine("\nYou need a 3-of-a-kind or better to gain any points! +0\n");
+                        break;
+                }
                 
                 
+                Console.WriteLine($"Final score: {score}");
             }
 
             gameOver = !gameOver;
