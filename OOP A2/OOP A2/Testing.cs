@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace OOP_A2;
 
-public class Testing
+public static class Testing
 {
     public static void RunTests()
     {
@@ -21,18 +21,31 @@ public class Testing
         Debug.Assert(rolls.Count == 1000, "Die roll count incorrect.");
         
         
+        
         Game[] games =
         {
             new SevensOut(),
             new ThreeOrMore()
         };
+
+        int resultSo = games[0].RunTest();
+        Debug.Assert(resultSo == 7, $"Game ended unexpectedly. result: {resultSo}");
         
-        int result = games[0].RunTest();
-        Debug.Assert(result == 7, $"Didn't end as expected. result: {result}");
+        int resultTom = games[1].RunTest();
+        Debug.Assert(resultTom < 20 && resultTom != -1, $"Didn't end as expected. result: {resultTom}");
         
+        string logPath = "../../../tests.log";
+        using (StreamWriter sw = new StreamWriter(logPath))
+        {
+            sw.WriteLine(string.Join(", ", rolls));
+            sw.WriteLine($"Roll count: {rolls.Count}");
+            
+            sw.WriteLine($"Sevens Out test result: {resultSo}");
+            sw.WriteLine($"Three Or More test result: {resultTom}");
+            
+            
+        }
         
-        
-        
-        Console.WriteLine("Tests complete!");
+        Console.WriteLine($"Tests complete! Output to file {logPath}");
     }
 }

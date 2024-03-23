@@ -6,8 +6,8 @@ public class SevensOut : Game
     {
         Name = "Sevens Out";
     }
-    
-    public override void PlayGame()
+
+    protected override void PlayGame()
     {
         Statistics.LoadStats(this);
         TimesPlayed += 1;
@@ -69,16 +69,12 @@ public class SevensOut : Game
 
         while (!gameOver)
         {
-            Console.WriteLine("Playing Sevens Out!\n \n");
+            Console.WriteLine("Testing Sevens Out!\n \n");
             Die[] dice = new Die[2];
             for (int i = 0; i < dice.Length; i++)
             {
                 dice[i] = new Die();
             }
-
-            Console.WriteLine($"Total = {total} \nPress Enter to roll again!");
-            Console.ReadLine();
-
             j++;
             // roll both die
             foreach (var t in dice)
@@ -87,8 +83,6 @@ public class SevensOut : Game
             }
 
             // display the values of both die
-            Console.WriteLine($"Roll {j}: \nDie 1: {dice[0].Value} \nDie 2: {dice[1].Value} \n ");
-
             testResult = dice[0].Value + dice[1].Value;
             
             // check if either roll is 7
@@ -99,8 +93,10 @@ public class SevensOut : Game
                 total += (dice[0].Value + dice[1].Value) * 2;
             }
             else total += dice[0].Value + dice[1].Value;
+            
         }
 
+        Console.WriteLine("Test Complete");
         return testResult;
     }
 }
