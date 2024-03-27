@@ -38,9 +38,9 @@ public abstract class Game
                 games[gameChoice].PlayGame();
                 break;
             }
-            catch
+            catch (Exception e)
             {
-                Console.WriteLine("Game number not found. Attempting extra options");
+                Console.WriteLine($"Game number not found. Attempting extra options (Error: {e.Message})");
             }
             
 

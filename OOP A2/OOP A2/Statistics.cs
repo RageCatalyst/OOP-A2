@@ -5,9 +5,18 @@ public class Statistics
 {
     public static void SaveStats(Game game)
     {
+        try
+        {
+            File.ReadAllText("../../../stats.json");
+        }
+        catch (FileNotFoundException)
+        {
+            ResetStats();
+        }
+        
         var stats = JsonConvert.DeserializeObject<Dictionary<string, int>>(File.ReadAllText("../../../stats.json"));
 
-        if (stats == null) return;
+        if (stats == null) ResetStats();
         stats[$"{game.Name} Total Plays"] = game.TimesPlayed;
         stats[$"{game.Name} High Score"] = game.HighScore;
         
@@ -17,9 +26,17 @@ public class Statistics
     
     public static void LoadStats(Game game)
     {
+        try
+        {
+            File.ReadAllText("../../../stats.json");
+        }
+        catch (FileNotFoundException)
+        {
+            ResetStats();
+        }
         //load the stats from a file
         var stats = JsonConvert.DeserializeObject<Dictionary<string, int>>(File.ReadAllText("../../../stats.json"));
-        if (stats == null) return;
+        if (stats == null) ResetStats();
         game.TimesPlayed = stats[$"{game.Name} Total Plays"];
         game.HighScore = stats[$"{game.Name} High Score"];
     }
