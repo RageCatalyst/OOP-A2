@@ -116,6 +116,7 @@ public class ThreeOrMore : Game
             if (choice?.ToLower() == "a") continue;
 
             Console.WriteLine("re-rolling remaining die...");
+            
             // re-roll all remaining die (die with a count of 1)
             foreach (var pair in dieValues.Where(pair => pair.Value == 1))
             {
@@ -168,37 +169,12 @@ public class ThreeOrMore : Game
                 Console.WriteLine("New High Score!");
             }
             
-            /*while(true)
-            {
-                var playAgain = Console.ReadLine();
-                // Plays the selected game
-                try
-                {
-                    if (playAgain?.ToLower() is not ("n" or "y"))
-                    {
-                        throw new Exception("Invalid input. Please enter 'y' or 'n'.");
-                    }
-                    
-                    if(playAgain?.ToLower() == "y")
-                    {
-                        break;
-                    }
-
-                    turnOver = true;
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Program.PresentError(e);
-                }
-            }*/
-            
             turnOver = true;
             turn += 1;
             turn %= 2;
         }
 
-        return turn;
+        return playerScores[turn];
     }
     
 }

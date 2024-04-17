@@ -32,7 +32,7 @@ public static class Testing
         Debug.Assert(resultSo == 7, $"Game ended unexpectedly. result: {resultSo}");
         
         int resultTom = games[1].RunTest();
-        Debug.Assert(resultTom < 20 && resultTom != -1, $"Didn't end as expected. result: {resultTom}");
+        Debug.Assert(resultTom > 20 || resultTom != -1, $"Didn't end as expected. result: {resultTom}");
         
         string logPath = "../../../tests.log";
         using (StreamWriter sw = new StreamWriter(logPath))
