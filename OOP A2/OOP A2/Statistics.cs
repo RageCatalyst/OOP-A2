@@ -57,4 +57,25 @@ public class Statistics
         var json = JsonConvert.SerializeObject(stats);
         File.WriteAllText("../../../stats.json", json);
     }
+
+    public static void DisplayStats()
+    {
+        try
+        {
+            File.ReadAllText("../../../stats.json");
+        }
+        catch (FileNotFoundException)
+        {
+            ResetStats();
+        }
+        //load the stats from a file
+        var stats = JsonConvert.DeserializeObject<Dictionary<string, int>>(File.ReadAllText("../../../stats.json"));
+        if (stats == null) ResetStats();
+        
+        Console.WriteLine("Statistics:");
+        foreach (var (key, value) in stats)
+        {
+            Console.WriteLine($"{key}: {value}");
+        }
+    }
 }

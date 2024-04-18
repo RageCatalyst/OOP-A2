@@ -56,6 +56,9 @@ public abstract class Game
                     Console.WriteLine("Running Tests");
                     Testing.RunTests();
                     return;
+                case "s":
+                    Statistics.DisplayStats();
+                    return;
                 default:
                     Console.WriteLine("No extra choice with that alias.");
                     break;
