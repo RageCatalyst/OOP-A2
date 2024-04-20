@@ -5,22 +5,27 @@ public class Statistics
 {
     public static void SaveStats(Game game)
     {
+        // try read file (i've tried to do this with file.exists, it was not having it)
         try
         {
             File.ReadAllText("../../../stats.json");
         }
         catch (FileNotFoundException)
         {
+            // if file not found, reset stats (create new stats file) 
             ResetStats();
         }
         
+        // load the stats from a file
         var stats = JsonConvert.DeserializeObject<Dictionary<string, int>>(File.ReadAllText("../../../stats.json"));
 
+        // if stats is null, reset stats
         if (stats == null) ResetStats();
+        // set the stats for the game
         stats[$"{game.Name} Total Plays"] = game.TimesPlayed;
         stats[$"{game.Name} High Score"] = game.HighScore;
         
-
+        // save the stats to a file
         File.WriteAllText("../../../stats.json", JsonConvert.SerializeObject(stats));
     }
     
@@ -37,6 +42,7 @@ public class Statistics
         //load the stats from a file
         var stats = JsonConvert.DeserializeObject<Dictionary<string, int>>(File.ReadAllText("../../../stats.json"));
         if (stats == null) ResetStats();
+        //set the stats for the game
         game.TimesPlayed = stats[$"{game.Name} Total Plays"];
         game.HighScore = stats[$"{game.Name} High Score"];
     }
@@ -54,6 +60,7 @@ public class Statistics
             {"Three Or More High Score", 0}
         };
         
+        // save the stats to a file
         var json = JsonConvert.SerializeObject(stats);
         File.WriteAllText("../../../stats.json", json);
     }
@@ -72,6 +79,7 @@ public class Statistics
         var stats = JsonConvert.DeserializeObject<Dictionary<string, int>>(File.ReadAllText("../../../stats.json"));
         if (stats == null) ResetStats();
         
+        //display the stats
         Console.WriteLine("Statistics:");
         foreach (var (key, value) in stats)
         {
